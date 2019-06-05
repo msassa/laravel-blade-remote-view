@@ -47,7 +47,7 @@
                 "Wehaa\\RemoteView\\RemoteViewServiceProvider"
             ],
             "aliases": {
-                "RemoteView": "Wehaa\\RemoteView\\RemoteViewFacade"
+                "RemoteView": "Wehaa\\RemoteView\\Facade\\RemoteView"
             }
         }
     }

@@ -3,6 +3,7 @@
 namespace Wehaa\RemoteView;
 
 use Wehaa\RemoteView\RemoteView;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Wehaa\RemoteView\RemoteViewCompiler;
 
@@ -17,7 +18,7 @@ class RemoteViewServiceProvider extends ServiceProvider
             'remoteInclude',
             function ($expression) {
                 $tmp = str_replace('.', '/', $expression);
-                return "<?php echo WehaaView::make({$tmp}, \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>";
+                return "<?php echo RemoteView::make({$tmp}, \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>";
             }
         );
     }
