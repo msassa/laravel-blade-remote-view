@@ -1,11 +1,8 @@
-# Very short description of the package
+# Load blade views from AWS S3
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/wehaa/remote-view.svg?style=flat-square)](https://packagist.org/packages/wehaa/remote-view)
-[![Build Status](https://img.shields.io/travis/wehaa/remote-view/master.svg?style=flat-square)](https://travis-ci.org/wehaa/remote-view)
-[![Quality Score](https://img.shields.io/scrutinizer/g/wehaa/remote-view.svg?style=flat-square)](https://scrutinizer-ci.com/g/wehaa/remote-view)
-[![Total Downloads](https://img.shields.io/packagist/dt/wehaa/remote-view.svg?style=flat-square)](https://packagist.org/packages/wehaa/remote-view)
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+You can use RemoteView::make('some_view)->render(); to load blade files from S3.
+You need to have the s3 disk configured.
+Also is a new blade directive called @remoteInclude('some_view') to use in your views.
 
 ## Installation
 
@@ -18,14 +15,10 @@ composer require wehaa/remote-view
 ## Usage
 
 ``` php
-// Usage description here
+RemoteView::make('some_view)->render();
 ```
 
-### Testing
-
-``` bash
-composer test
-```
+or @remoteInclude('layouts.partials.body-start-scripts') in your blade files.
 
 ### Changelog
 
@@ -42,7 +35,6 @@ If you discover any security related issues, please email sassaroli@gmail.com in
 ## Credits
 
 - [Mauro Sassaroli](https://github.com/wehaa)
-- [All Contributors](../../contributors)
 
 ## License
 
