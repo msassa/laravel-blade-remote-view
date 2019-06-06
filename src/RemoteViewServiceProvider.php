@@ -30,7 +30,7 @@ class RemoteViewServiceProvider extends ServiceProvider
     {
         $this->app->singleton(RemoteView::class);
 
-        $this->app->alias(RemoteView::class, 'remoteview');
+        $this->app->alias(RemoteView::class, 'remote-view');
 
         $this->app->bind(
             RemoteViewCompiler::class,

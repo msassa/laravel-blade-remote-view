@@ -1,10 +1,10 @@
 <?php
 
-namespace Wehaa\RemoteView\Facades;
+namespace Wehaa\RemoteView;
 
 use Illuminate\Support\Facades\Facade;
 
-class RemoteView extends Facade
+class RemoteViewFacade extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class RemoteView extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'remoteview';
+        return 'remote-view';
     }
 }
