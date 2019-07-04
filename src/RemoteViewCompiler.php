@@ -3,6 +3,7 @@
 namespace Wehaa\RemoteView;
 
 use Illuminate\Config\Repository;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\Compilers\CompilerInterface;
@@ -16,6 +17,10 @@ class RemoteViewCompiler extends BladeCompiler implements CompilerInterface
     {
         // Get Current Blade Instance
         $blade = app('view')->getEngineResolver()->resolve('blade')->getCompiler();
+
+        if (!File::exists($cache_path)) {
+            File::makeDirectory($cache_path, $mode = 0777, true, true);
+        }
 
         parent::__construct($filesystem, $cache_path);
         $this->rawTags          = $blade->rawTags;

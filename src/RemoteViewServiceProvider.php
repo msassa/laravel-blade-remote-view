@@ -35,7 +35,7 @@ class RemoteViewServiceProvider extends ServiceProvider
         $this->app->bind(
             RemoteViewCompiler::class,
             function ($app) {
-                $cache_path = storage_path('app/wehaa-view-compiler/views');
+                $cache_path = storage_path('app/wehaa-view-compiler/views/' . str_slug($_SERVER['HTTP_HOST']));
                 return new RemoteViewCompiler($app['files'], $cache_path, $app['config']);
             }
         );
