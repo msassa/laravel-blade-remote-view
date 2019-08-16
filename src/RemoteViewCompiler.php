@@ -72,7 +72,13 @@ class RemoteViewCompiler extends BladeCompiler implements CompilerInterface
         if (!$this->cachePath || !$this->files->exists($compiled)) {
             return true;
         }
-        $lastModified = Storage::disk('s3')->lastModified($path);
+
+        $lastModified = cache()->tags('template_was_mod')->rememberForever(
+            get_cache_key('wasmod_' . $path),
+            function () use ($path) {
+                return Storage::disk('s3')->lastModified($path);
+            }
+        );
 
         if ($lastModified >= $this->files->lastModified($compiled)) {
             cache()->forget(get_cache_key($path));

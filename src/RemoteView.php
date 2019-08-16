@@ -4,9 +4,10 @@ namespace Wehaa\RemoteView;
 
 use View, Closure, ArrayAccess;
 use Illuminate\Config\Repository;
-use Wehaa\RemoteView\RemoteViewCompilerEngine;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Renderable;
+use Wehaa\RemoteView\RemoteViewCompilerEngine;
 
 class RemoteView extends \Illuminate\View\View implements ArrayAccess, Renderable
 {
@@ -29,7 +30,17 @@ class RemoteView extends \Illuminate\View\View implements ArrayAccess, Renderabl
     public function make($path, $data = array(), $mergeData = array())
     {
         $tmp = str_replace('.', '/', $path);
-        $this->path = "templates/{$tmp}.blade.php";
+        $exists = cache()->tags('template_url_exists')->rememberForever(
+            get_cache_key('exists_' . $tmp),
+            function () use ($tmp) {
+                return Storage::disk('s3')->exists("templates/" . config('tenant.url_slug') . "/{$tmp}.blade.php");
+            }
+        );
+        if ($exists) {
+            $this->path = "templates/" . config('tenant.url_slug') . "/{$tmp}.blade.php";
+        } else {
+            $this->path = "templates/{$tmp}.blade.php";
+        }
         $this->data = array_merge($mergeData, $this->parseData($data));
 
         return $this;
