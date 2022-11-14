@@ -137,7 +137,7 @@ class RemoteView extends \Illuminate\View\View implements ArrayAccess, Renderabl
      * @param  string $key
      * @return bool
      */
-    public function offsetExists($key)
+    public function offsetExists($key): bool
     {
         return array_key_exists($key, $this->data);
     }
@@ -148,7 +148,7 @@ class RemoteView extends \Illuminate\View\View implements ArrayAccess, Renderabl
      * @param  string $key
      * @return mixed
      */
-    public function offsetGet($key)
+    public function offsetGet($key): mixed
     {
         return $this->data[$key];
     }
@@ -160,7 +160,7 @@ class RemoteView extends \Illuminate\View\View implements ArrayAccess, Renderabl
      * @param  mixed  $value
      * @return void
      */
-    public function offsetSet($key, $value)
+    public function offsetSet($key, $value): void
     {
         $this->with($key, $value);
     }
@@ -171,7 +171,7 @@ class RemoteView extends \Illuminate\View\View implements ArrayAccess, Renderabl
      * @param  string $key
      * @return void
      */
-    public function offsetUnset($key)
+    public function offsetUnset($key): void
     {
         unset($this->data[$key]);
     }
